@@ -59,6 +59,10 @@ class ImageProcessor:
         # Convert bytes to PIL Image
         pil_image = Image.open(BytesIO(image_bytes))
         
+        # OPTIMIZATION: Resize large images immediately to prevent OOM/Timeouts on free tier
+        # 800x800 is sufficient for feature extraction before final 224x224 resize
+        pil_image.thumbnail((800, 800))
+        
         # Convert PIL to numpy array
         img_array = np.array(pil_image)
         

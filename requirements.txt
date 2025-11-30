@@ -3,6 +3,6 @@ uvicorn
 python-multipart
 numpy
 requests
-pinecone-client
+pinecone
 tensorflow-cpu
 opencv-python-headless

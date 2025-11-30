@@ -59,9 +59,9 @@ class ImageProcessor:
         # Convert bytes to PIL Image
         pil_image = Image.open(BytesIO(image_bytes))
         
-        # OPTIMIZATION: Resize large images immediately to prevent OOM/Timeouts on free tier
-        # 800x800 is sufficient for feature extraction before final 224x224 resize
-        pil_image.thumbnail((800, 800))
+        # OPTIMIZATION: Resize directly to 224x224 for maximum speed on free tier
+        # This skips intermediate processing steps on large arrays
+        pil_image = pil_image.resize((224, 224), Image.Resampling.LANCZOS)
         
         # Convert PIL to numpy array
         img_array = np.array(pil_image)
@@ -90,8 +90,8 @@ class ImageProcessor:
         # Convert back to 3-channel for ResNet50 (expects RGB)
         enhanced_rgb = cv2.cvtColor(enhanced, cv2.COLOR_GRAY2RGB)
         
-        # Resize to 224x224 for ResNet50
-        resized = cv2.resize(enhanced_rgb, (224, 224))
+        # Resize already done at start
+        resized = enhanced_rgb
         
         # Convert to array and add batch dimension
         img_array = np.expand_dims(resized, axis=0)

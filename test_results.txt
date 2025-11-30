@@ -1,0 +1,15 @@
+🌍 TESTING GEO-FENCING LOGIC
+==================================================
+
+1️⃣  Registering Cow 'GeoBessie' at Mumbai (19.0760, 72.8777)...
+✅ Registration Successful!
+{'status': 'saved', 'cow_id': '076b2416-c54c-42aa-b88b-7bfc6e54d5d1', 'cow_name': 'GeoBessie', 'vector_dimensions': 2048}
+
+2️⃣  Identifying from NEARBY location (Very Close - 19.0700, 72.8700)...
+✅ SUCCESS: Match Found! Status: APPROVED
+   Distance: 1.05 km
+
+3️⃣  Identifying from FAR location (Pune - 18.5204, 73.8567)...
+✅ SUCCESS: Location Mismatch Detected!
+   Message: ❌ Face matches, but location is too far (120.2km)
+   Distance: 120.15 km
